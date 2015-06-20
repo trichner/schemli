@@ -6,6 +6,7 @@ import ch.n1b.worldedit.schematic.schematic.Cuboid;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created on 20.06.2015.
@@ -56,19 +57,20 @@ public class Main {
 
         String[] splits = filename.split("\\.");
 
-
-        StringBuffer prefixBuilder = new StringBuffer();
-        for(int i=0;i<splits.length-1;i++) {
-            prefixBuilder.append(splits[i]);
-        }
-        String prefix = prefixBuilder.toString();
+        String prefix = splits[0];
         String postfix = ".schematic";
         if(splits.length>1) {
-            postfix = splits[splits.length - 1];
+            prefix = String.join(".", Arrays.copyOf(splits, splits.length - 1));
+            postfix = "." + splits[splits.length - 1];
+        }
+
+        String folder = "";
+        if(file.getPath().lastIndexOf(File.separator)>0){
+            folder =  file.getPath().substring(0, file.getPath().lastIndexOf(File.separator));
         }
 
         for (String rotationName : ROT) {
-            String rotatedFilename = file.getPath() + prefix + rotationName + postfix;
+            String rotatedFilename = folder + prefix + rotationName + postfix;
             try {
                 System.out.println("Saving " + rotatedFilename);
                 LibschemAPI.saveSchematic(rotatedFilename,cuboid);
