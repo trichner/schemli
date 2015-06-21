@@ -7,7 +7,6 @@ import ch.n1b.worldedit.schematic.schematic.Cuboid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created on 20.06.2015.
@@ -28,9 +27,7 @@ public class Main {
             System.out.println("Usage: schemli <input schematic(s)>");
             System.exit(1);
         }
-
-        List<String> schematics = Arrays.asList(Arrays.copyOfRange(args, 2, args.length));
-        schematics.parallelStream().forEach(s -> rotate(s));
+        Arrays.stream(args).parallel().forEach(s -> rotate(s));
     }
 
     private static void rotate(String path){
