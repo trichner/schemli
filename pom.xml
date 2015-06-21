@@ -6,7 +6,7 @@
 
     <groupId>ch.n1b.schemli</groupId>
     <artifactId>schemli</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 
     <repositories>
         <!-- bukkit is dead! long live spigot! -->
